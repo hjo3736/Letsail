@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5f656875b1a66e741a948102ed301e83
+guid: 7ca9e0c3ac86a5b4f96d3565f9b8a994
 ModelImporter:
   serializedVersion: 24300
   internalIDToNameTable: []
@@ -8,47 +8,97 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: M_Black
-    second: {fileID: 2100000, guid: aab987b0f534aaf4494547dbbaf63228, type: 2}
+    second: {fileID: 2100000, guid: 5d385720fc823d84c99ca04b684bb676, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_ClothBlue
+    second: {fileID: 2100000, guid: 156a7d28c2d753948b103e11c97423d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_ClothGreen
+    second: {fileID: 2100000, guid: 53af12f4b446ed8459a0ab3073e9ff6c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_ClothRed
+    second: {fileID: 2100000, guid: d0e2fb82c32c6c945b9266f738bc762b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_ClothYellow
+    second: {fileID: 2100000, guid: a0644a6436b4d114aa15a329bf2d4e28, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: M_Deck
-    second: {fileID: 2100000, guid: 6561085f57bab8343a1da9ce6d053537, type: 2}
+    second: {fileID: 2100000, guid: d18b1868b5affe946894c901cb30c659, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Flame
+    second: {fileID: 2100000, guid: f16d459e39f70af49b07b980a09d7938, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_FlameCore
+    second: {fileID: 2100000, guid: 90a0fd65244e7b44fbf52ad637dfb77c, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: M_FloodWater
-    second: {fileID: 2100000, guid: f1d913dd86508ea4eb18a8071a14286e, type: 2}
+    second: {fileID: 2100000, guid: 567778f2369764f40bf4506569c43b2a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: M_Gold
-    second: {fileID: 2100000, guid: 76b1cfde4fad90b45908d82fc2622071, type: 2}
+    second: {fileID: 2100000, guid: 47e67d17a7e0dd6469ad2bcd415e9251, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: M_Lamp
-    second: {fileID: 2100000, guid: f299c15dbb1664846bb464511bb3fcbb, type: 2}
+    second: {fileID: 2100000, guid: 299ff4583c6272249806fe31f1906c32, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Metal
+    second: {fileID: 2100000, guid: 6711864fb82a75649b6d637156a885de, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Paper
+    second: {fileID: 2100000, guid: 0c5649906d4782c45ab98abe1f16a6a2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Rope
+    second: {fileID: 2100000, guid: c22dc2a59f4a7b644bad8b90ffdb9ed9, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: M_Sail
-    second: {fileID: 2100000, guid: 4b18262dfa3ba494b93d31edb12ddae0, type: 2}
+    second: {fileID: 2100000, guid: 98dbc82f8d40b0948b96d119256ffa9e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_WaterMask
+    second: {fileID: 2100000, guid: 198ea46fa44c69b45873061b02c402eb, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: M_White
-    second: {fileID: 2100000, guid: d9d8aa4b3d0859b439477a07cbb522aa, type: 2}
+    second: {fileID: 2100000, guid: 7e732eb4aef1f16419783db5da3f3e90, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: M_Wood
-    second: {fileID: 2100000, guid: 3d7e1fdb344bd4a48bf9bc159320e7f1, type: 2}
+    second: {fileID: 2100000, guid: 64bc2da7433e0d349ba9b014e03d0bc6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: M_WoodDark
-    second: {fileID: 2100000, guid: df6016de8b48ac74487cdd3739faa86b, type: 2}
+    second: {fileID: 2100000, guid: 5dbd82f21b99e154b81868820b439851, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
