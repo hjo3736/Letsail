@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfbab9eb326508942944b5e8c6023f9b, type: 3}
+  m_Name: OceanSettings
+  m_EditorClassIdentifier: Letsail.Runtime::Letsail.Ocean.OceanSettings
+  waves:
+  - directionDegrees: 0
+    steepness: 0.12
+    wavelength: 30
+  - directionDegrees: 35
+    steepness: 0.1
+    wavelength: 18
+  - directionDegrees: -25
+    steepness: 0.08
+    wavelength: 11
+  - directionDegrees: 70
+    steepness: 0.06
+    wavelength: 6
+  seaLevel: 0
