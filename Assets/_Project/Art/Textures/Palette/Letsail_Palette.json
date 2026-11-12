@@ -1,0 +1,1482 @@
+{
+ "texture": "Letsail_Colormap.png",
+ "size": [
+  256,
+  128
+ ],
+ "cell_px": 16,
+ "columns": 16,
+ "filter": "Point",
+ "colors": [
+  {
+   "index": 0,
+   "hex": "#FF6B6B",
+   "uv": [
+    0.03125,
+    0.9375
+   ],
+   "materials": [
+    "M_MelonRed"
+   ],
+   "used_in": [
+    "items"
+   ]
+  },
+  {
+   "index": 1,
+   "hex": "#FF8080",
+   "uv": [
+    0.09375,
+    0.9375
+   ],
+   "materials": [
+    "M_Coral"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 2,
+   "hex": "#FFA8A8",
+   "uv": [
+    0.15625,
+    0.9375
+   ],
+   "materials": [
+    "M_ShellPink"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 3,
+   "hex": "#A8413E",
+   "uv": [
+    0.21875,
+    0.9375
+   ],
+   "materials": [
+    "M_CoatRed"
+   ],
+   "used_in": [
+    "player"
+   ]
+  },
+  {
+   "index": 4,
+   "hex": "#CF534F",
+   "uv": [
+    0.28125,
+    0.9375
+   ],
+   "materials": [
+    "M_ClothRed",
+    "M_RoofRed",
+    "M_ShirtRed"
+   ],
+   "used_in": [
+    "env",
+    "items",
+    "lobby",
+    "player",
+    "ship"
+   ]
+  },
+  {
+   "index": 5,
+   "hex": "#E04C47",
+   "uv": [
+    0.34375,
+    0.9375
+   ],
+   "materials": [
+    "M_AppleRed",
+    "M_MushroomRed"
+   ],
+   "used_in": [
+    "env",
+    "items"
+   ]
+  },
+  {
+   "index": 6,
+   "hex": "#F2807A",
+   "uv": [
+    0.40625,
+    0.9375
+   ],
+   "materials": [
+    "M_MeatRaw"
+   ],
+   "used_in": [
+    "items"
+   ]
+  },
+  {
+   "index": 7,
+   "hex": "#CC453D",
+   "uv": [
+    0.46875,
+    0.9375
+   ],
+   "materials": [
+    "M_PaintRed"
+   ],
+   "used_in": [
+    "logo"
+   ]
+  },
+  {
+   "index": 8,
+   "hex": "#944540",
+   "uv": [
+    0.53125,
+    0.9375
+   ],
+   "materials": [
+    "M_Mouth"
+   ],
+   "used_in": [
+    "lobby",
+    "player"
+   ]
+  },
+  {
+   "index": 9,
+   "hex": "#F29E8F",
+   "uv": [
+    0.59375,
+    0.9375
+   ],
+   "materials": [
+    "M_Cheek"
+   ],
+   "used_in": [
+    "lobby",
+    "player"
+   ]
+  },
+  {
+   "index": 10,
+   "hex": "#FFDBD1",
+   "uv": [
+    0.65625,
+    0.9375
+   ],
+   "materials": [
+    "M_Shell"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 11,
+   "hex": "#845442",
+   "uv": [
+    0.71875,
+    0.9375
+   ],
+   "materials": [
+    "M_Hair",
+    "M_WoodDark"
+   ],
+   "used_in": [
+    "env",
+    "items",
+    "lobby",
+    "player",
+    "ship"
+   ]
+  },
+  {
+   "index": 12,
+   "hex": "#B06041",
+   "uv": [
+    0.78125,
+    0.9375
+   ],
+   "materials": [
+    "M_Brown",
+    "M_Wood"
+   ],
+   "used_in": [
+    "env",
+    "items",
+    "lobby",
+    "player",
+    "ship"
+   ]
+  },
+  {
+   "index": 13,
+   "hex": "#B85C38",
+   "uv": [
+    0.84375,
+    0.9375
+   ],
+   "materials": [
+    "M_MeatCooked"
+   ],
+   "used_in": [
+    "items"
+   ]
+  },
+  {
+   "index": 14,
+   "hex": "#995A41",
+   "uv": [
+    0.90625,
+    0.9375
+   ],
+   "materials": [
+    "M_Leather",
+    "M_Trunk"
+   ],
+   "used_in": [
+    "env",
+    "items",
+    "lobby"
+   ]
+  },
+  {
+   "index": 15,
+   "hex": "#6B4738",
+   "uv": [
+    0.96875,
+    0.9375
+   ],
+   "materials": [
+    "M_TrunkDark"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 16,
+   "hex": "#613826",
+   "uv": [
+    0.03125,
+    0.8125
+   ],
+   "materials": [
+    "M_PlankGrain"
+   ],
+   "used_in": [
+    "logo"
+   ]
+  },
+  {
+   "index": 17,
+   "hex": "#FF7E44",
+   "uv": [
+    0.09375,
+    0.8125
+   ],
+   "materials": [
+    "M_Flame",
+    "M_Flower",
+    "M_Orange"
+   ],
+   "used_in": [
+    "env",
+    "items",
+    "lobby",
+    "player"
+   ]
+  },
+  {
+   "index": 18,
+   "hex": "#8C4C2E",
+   "uv": [
+    0.15625,
+    0.8125
+   ],
+   "materials": [
+    "M_BottleBrown"
+   ],
+   "used_in": [
+    "items"
+   ]
+  },
+  {
+   "index": 19,
+   "hex": "#85543D",
+   "uv": [
+    0.21875,
+    0.8125
+   ],
+   "materials": [
+    "M_Coconut"
+   ],
+   "used_in": [
+    "items"
+   ]
+  },
+  {
+   "index": 20,
+   "hex": "#784730",
+   "uv": [
+    0.28125,
+    0.8125
+   ],
+   "materials": [
+    "M_PlankB"
+   ],
+   "used_in": [
+    "logo"
+   ]
+  },
+  {
+   "index": 21,
+   "hex": "#F1976C",
+   "uv": [
+    0.34375,
+    0.8125
+   ],
+   "materials": [
+    "M_Deck",
+    "M_WoodLight"
+   ],
+   "used_in": [
+    "env",
+    "items",
+    "lobby",
+    "ship"
+   ]
+  },
+  {
+   "index": 22,
+   "hex": "#8C5438",
+   "uv": [
+    0.40625,
+    0.8125
+   ],
+   "materials": [
+    "M_PlankA"
+   ],
+   "used_in": [
+    "logo"
+   ]
+  },
+  {
+   "index": 23,
+   "hex": "#FF7326",
+   "uv": [
+    0.46875,
+    0.8125
+   ],
+   "materials": [
+    "M_Lava"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 24,
+   "hex": "#FF8C4C",
+   "uv": [
+    0.53125,
+    0.8125
+   ],
+   "materials": [
+    "M_Starfish"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 25,
+   "hex": "#856654",
+   "uv": [
+    0.59375,
+    0.8125
+   ],
+   "materials": [
+    "M_Bark"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 26,
+   "hex": "#B37347",
+   "uv": [
+    0.65625,
+    0.8125
+   ],
+   "materials": [
+    "M_LetterEdge"
+   ],
+   "used_in": [
+    "logo"
+   ]
+  },
+  {
+   "index": 27,
+   "hex": "#B87340",
+   "uv": [
+    0.71875,
+    0.8125
+   ],
+   "materials": [
+    "M_BreadCrust"
+   ],
+   "used_in": [
+    "items"
+   ]
+  },
+  {
+   "index": 28,
+   "hex": "#F2BF99",
+   "uv": [
+    0.78125,
+    0.8125
+   ],
+   "materials": [
+    "M_Rope"
+   ],
+   "used_in": [
+    "env",
+    "items",
+    "lobby",
+    "logo",
+    "ship"
+   ]
+  },
+  {
+   "index": 29,
+   "hex": "#B0805C",
+   "uv": [
+    0.84375,
+    0.8125
+   ],
+   "materials": [
+    "Terrain_Dirt"
+   ],
+   "used_in": [
+    "terrain"
+   ]
+  },
+  {
+   "index": 30,
+   "hex": "#FF9938",
+   "uv": [
+    0.90625,
+    0.8125
+   ],
+   "materials": [
+    "M_Orange"
+   ],
+   "used_in": [
+    "items"
+   ]
+  },
+  {
+   "index": 31,
+   "hex": "#EDA866",
+   "uv": [
+    0.96875,
+    0.8125
+   ],
+   "materials": [
+    "M_Bread"
+   ],
+   "used_in": [
+    "items"
+   ]
+  },
+  {
+   "index": 32,
+   "hex": "#D9A673",
+   "uv": [
+    0.03125,
+    0.6875
+   ],
+   "materials": [
+    "M_Cork"
+   ],
+   "used_in": [
+    "items"
+   ]
+  },
+  {
+   "index": 33,
+   "hex": "#F2BF8C",
+   "uv": [
+    0.09375,
+    0.6875
+   ],
+   "materials": [
+    "M_MushroomCap"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 34,
+   "hex": "#CCB399",
+   "uv": [
+    0.15625,
+    0.6875
+   ],
+   "materials": [
+    "M_Driftwood"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 35,
+   "hex": "#E0B88C",
+   "uv": [
+    0.21875,
+    0.6875
+   ],
+   "materials": [
+    "Terrain_SandWet"
+   ],
+   "used_in": [
+    "terrain"
+   ]
+  },
+  {
+   "index": 36,
+   "hex": "#FDE4C7",
+   "uv": [
+    0.28125,
+    0.6875
+   ],
+   "materials": [
+    "M_Label",
+    "M_Paper",
+    "M_Plaster"
+   ],
+   "used_in": [
+    "items",
+    "lobby"
+   ]
+  },
+  {
+   "index": 37,
+   "hex": "#F8D6AE",
+   "uv": [
+    0.34375,
+    0.6875
+   ],
+   "materials": [
+    "M_Sand",
+    "M_Skin",
+    "Terrain_Sand"
+   ],
+   "used_in": [
+    "lobby",
+    "player",
+    "terrain"
+   ]
+  },
+  {
+   "index": 38,
+   "hex": "#DBB88C",
+   "uv": [
+    0.40625,
+    0.6875
+   ],
+   "materials": [
+    "M_Seabed",
+    "Terrain_Seabed"
+   ],
+   "used_in": [
+    "lobby",
+    "terrain"
+   ]
+  },
+  {
+   "index": 39,
+   "hex": "#FFB349",
+   "uv": [
+    0.46875,
+    0.6875
+   ],
+   "materials": [
+    "M_ClothYellow"
+   ],
+   "used_in": [
+    "lobby",
+    "ship"
+   ]
+  },
+  {
+   "index": 40,
+   "hex": "#CCA670",
+   "uv": [
+    0.53125,
+    0.6875
+   ],
+   "materials": [
+    "M_ShortsTan"
+   ],
+   "used_in": [
+    "player"
+   ]
+  },
+  {
+   "index": 41,
+   "hex": "#DBC7A8",
+   "uv": [
+    0.59375,
+    0.6875
+   ],
+   "materials": [
+    "M_RockSand"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 42,
+   "hex": "#FACC80",
+   "uv": [
+    0.65625,
+    0.6875
+   ],
+   "materials": [
+    "M_LetterWood2"
+   ],
+   "used_in": [
+    "logo"
+   ]
+  },
+  {
+   "index": 43,
+   "hex": "#FFBF4C",
+   "uv": [
+    0.71875,
+    0.6875
+   ],
+   "materials": [
+    "M_Pineapple"
+   ],
+   "used_in": [
+    "items"
+   ]
+  },
+  {
+   "index": 44,
+   "hex": "#FCEDD1",
+   "uv": [
+    0.78125,
+    0.6875
+   ],
+   "materials": [
+    "M_Bone",
+    "M_MushroomStem"
+   ],
+   "used_in": [
+    "env",
+    "items"
+   ]
+  },
+  {
+   "index": 45,
+   "hex": "#FFC044",
+   "uv": [
+    0.84375,
+    0.6875
+   ],
+   "materials": [
+    "M_Gold"
+   ],
+   "used_in": [
+    "env",
+    "items",
+    "lobby",
+    "player",
+    "ship"
+   ]
+  },
+  {
+   "index": 46,
+   "hex": "#FFDB94",
+   "uv": [
+    0.90625,
+    0.6875
+   ],
+   "materials": [
+    "M_LetterWood"
+   ],
+   "used_in": [
+    "logo"
+   ]
+  },
+  {
+   "index": 47,
+   "hex": "#FFCC66",
+   "uv": [
+    0.96875,
+    0.6875
+   ],
+   "materials": [
+    "M_CoralYellow"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 48,
+   "hex": "#FFD162",
+   "uv": [
+    0.03125,
+    0.5625
+   ],
+   "materials": [
+    "M_FlameCore",
+    "M_FlowerYellow",
+    "M_Lamp",
+    "M_Straw"
+   ],
+   "used_in": [
+    "env",
+    "items",
+    "lobby",
+    "player",
+    "ship"
+   ]
+  },
+  {
+   "index": 49,
+   "hex": "#FFD161",
+   "uv": [
+    0.09375,
+    0.5625
+   ],
+   "materials": [
+    "M_Cheese"
+   ],
+   "used_in": [
+    "items"
+   ]
+  },
+  {
+   "index": 50,
+   "hex": "#FFD14C",
+   "uv": [
+    0.15625,
+    0.5625
+   ],
+   "materials": [
+    "M_LavaCore"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 51,
+   "hex": "#FFD959",
+   "uv": [
+    0.21875,
+    0.5625
+   ],
+   "materials": [
+    "M_Banana"
+   ],
+   "used_in": [
+    "items"
+   ]
+  },
+  {
+   "index": 52,
+   "hex": "#DBCC80",
+   "uv": [
+    0.28125,
+    0.5625
+   ],
+   "materials": [
+    "M_GrassDry"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 53,
+   "hex": "#B8C761",
+   "uv": [
+    0.34375,
+    0.5625
+   ],
+   "materials": [
+    "M_Bamboo"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 54,
+   "hex": "#B8D15C",
+   "uv": [
+    0.40625,
+    0.5625
+   ],
+   "materials": [
+    "M_LeafYellow"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 55,
+   "hex": "#8C9E4C",
+   "uv": [
+    0.46875,
+    0.5625
+   ],
+   "materials": [
+    "M_BambooNode"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 56,
+   "hex": "#6B9E59",
+   "uv": [
+    0.53125,
+    0.5625
+   ],
+   "materials": [
+    "M_Moss"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 57,
+   "hex": "#7AD173",
+   "uv": [
+    0.59375,
+    0.5625
+   ],
+   "materials": [
+    "M_Grass",
+    "Terrain_Grass"
+   ],
+   "used_in": [
+    "env",
+    "terrain"
+   ]
+  },
+  {
+   "index": 58,
+   "hex": "#599959",
+   "uv": [
+    0.65625,
+    0.5625
+   ],
+   "materials": [
+    "M_Seaweed"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 59,
+   "hex": "#4CA86B",
+   "uv": [
+    0.71875,
+    0.5625
+   ],
+   "materials": [
+    "Terrain_JungleGrass"
+   ],
+   "used_in": [
+    "terrain"
+   ]
+  },
+  {
+   "index": 60,
+   "hex": "#61CB8B",
+   "uv": [
+    0.78125,
+    0.5625
+   ],
+   "materials": [
+    "M_ClothGreen",
+    "M_Grass",
+    "M_Green",
+    "M_Leaf"
+   ],
+   "used_in": [
+    "env",
+    "items",
+    "lobby",
+    "player",
+    "ship"
+   ]
+  },
+  {
+   "index": 61,
+   "hex": "#4C996B",
+   "uv": [
+    0.84375,
+    0.5625
+   ],
+   "materials": [
+    "M_BottleGreen"
+   ],
+   "used_in": [
+    "items"
+   ]
+  },
+  {
+   "index": 62,
+   "hex": "#3DA679",
+   "uv": [
+    0.90625,
+    0.5625
+   ],
+   "materials": [
+    "M_GrassDark",
+    "M_LeafDark",
+    "M_MelonGreen",
+    "M_RoofGreen",
+    "M_Teal"
+   ],
+   "used_in": [
+    "env",
+    "items",
+    "lobby",
+    "player"
+   ]
+  },
+  {
+   "index": 63,
+   "hex": "#268061",
+   "uv": [
+    0.96875,
+    0.5625
+   ],
+   "materials": [
+    "M_LeafDeep"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 64,
+   "hex": "#61B2E0",
+   "uv": [
+    0.03125,
+    0.4375
+   ],
+   "materials": [
+    "Water_Shallow"
+   ],
+   "used_in": [
+    "terrain"
+   ]
+  },
+  {
+   "index": 65,
+   "hex": "#4D99E6",
+   "uv": [
+    0.09375,
+    0.4375
+   ],
+   "materials": [
+    "Water_Deep"
+   ],
+   "used_in": [
+    "terrain"
+   ]
+  },
+  {
+   "index": 66,
+   "hex": "#9BBDEC",
+   "uv": [
+    0.15625,
+    0.4375
+   ],
+   "materials": [
+    "M_Glass",
+    "M_SkyBlue"
+   ],
+   "used_in": [
+    "items",
+    "lobby",
+    "player"
+   ]
+  },
+  {
+   "index": 67,
+   "hex": "#6794D9",
+   "uv": [
+    0.21875,
+    0.4375
+   ],
+   "materials": [
+    "M_ClothBlue",
+    "M_PantsBlue"
+   ],
+   "used_in": [
+    "lobby",
+    "player",
+    "ship"
+   ]
+  },
+  {
+   "index": 68,
+   "hex": "#8FA8D1",
+   "uv": [
+    0.28125,
+    0.4375
+   ],
+   "materials": [
+    "M_Fish"
+   ],
+   "used_in": [
+    "items"
+   ]
+  },
+  {
+   "index": 69,
+   "hex": "#5F74CA",
+   "uv": [
+    0.34375,
+    0.4375
+   ],
+   "materials": [
+    "M_Navy",
+    "M_RoofBlue"
+   ],
+   "used_in": [
+    "lobby",
+    "player"
+   ]
+  },
+  {
+   "index": 70,
+   "hex": "#A0A8C9",
+   "uv": [
+    0.40625,
+    0.4375
+   ],
+   "materials": [
+    "M_Steel",
+    "M_Stone",
+    "M_Underwear"
+   ],
+   "used_in": [
+    "lobby",
+    "player"
+   ]
+  },
+  {
+   "index": 71,
+   "hex": "#9499B0",
+   "uv": [
+    0.46875,
+    0.4375
+   ],
+   "materials": [
+    "M_RockDark"
+   ],
+   "used_in": [
+    "env",
+    "lobby"
+   ]
+  },
+  {
+   "index": 72,
+   "hex": "#4F5260",
+   "uv": [
+    0.53125,
+    0.4375
+   ],
+   "materials": [
+    "M_DarkSteel"
+   ],
+   "used_in": [
+    "player"
+   ]
+  },
+  {
+   "index": 73,
+   "hex": "#73768B",
+   "uv": [
+    0.59375,
+    0.4375
+   ],
+   "materials": [
+    "M_Gray",
+    "M_Metal",
+    "M_StoneDark"
+   ],
+   "used_in": [
+    "env",
+    "items",
+    "lobby",
+    "player",
+    "ship"
+   ]
+  },
+  {
+   "index": 74,
+   "hex": "#332E47",
+   "uv": [
+    0.65625,
+    0.4375
+   ],
+   "materials": [
+    "M_Obsidian"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 75,
+   "hex": "#8158CF",
+   "uv": [
+    0.71875,
+    0.4375
+   ],
+   "materials": [
+    "M_Grape",
+    "M_Purple"
+   ],
+   "used_in": [
+    "items",
+    "player"
+   ]
+  },
+  {
+   "index": 76,
+   "hex": "#A673D9",
+   "uv": [
+    0.78125,
+    0.4375
+   ],
+   "materials": [
+    "M_CoralPurple"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 77,
+   "hex": "#FF8CB3",
+   "uv": [
+    0.84375,
+    0.4375
+   ],
+   "materials": [
+    "M_FlowerPink"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 78,
+   "hex": "#8C2E4C",
+   "uv": [
+    0.90625,
+    0.4375
+   ],
+   "materials": [
+    "M_Wine"
+   ],
+   "used_in": [
+    "items"
+   ]
+  },
+  {
+   "index": 79,
+   "hex": "#8C807A",
+   "uv": [
+    0.96875,
+    0.4375
+   ],
+   "materials": [
+    "M_DeadWood"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 80,
+   "hex": "#C0B5A8",
+   "uv": [
+    0.03125,
+    0.3125
+   ],
+   "materials": [
+    "M_Cobble"
+   ],
+   "used_in": [
+    "lobby"
+   ]
+  },
+  {
+   "index": 81,
+   "hex": "#FAF7F2",
+   "uv": [
+    0.09375,
+    0.3125
+   ],
+   "materials": [
+    "M_FlowerWhite"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 82,
+   "hex": "#FAF5EB",
+   "uv": [
+    0.15625,
+    0.3125
+   ],
+   "materials": [
+    "M_CoconutWhite"
+   ],
+   "used_in": [
+    "items"
+   ]
+  },
+  {
+   "index": 83,
+   "hex": "#FCF7E5",
+   "uv": [
+    0.21875,
+    0.3125
+   ],
+   "materials": [
+    "M_Foam"
+   ],
+   "used_in": [
+    "items"
+   ]
+  },
+  {
+   "index": 84,
+   "hex": "#F7FAFF",
+   "uv": [
+    0.28125,
+    0.3125
+   ],
+   "materials": [
+    "Water_Foam"
+   ],
+   "used_in": [
+    "terrain"
+   ]
+  },
+  {
+   "index": 85,
+   "hex": "#B2B8CC",
+   "uv": [
+    0.34375,
+    0.3125
+   ],
+   "materials": [
+    "Terrain_Rock"
+   ],
+   "used_in": [
+    "terrain"
+   ]
+  },
+  {
+   "index": 86,
+   "hex": "#6B6E7A",
+   "uv": [
+    0.40625,
+    0.3125
+   ],
+   "materials": [
+    "M_Nail"
+   ],
+   "used_in": [
+    "logo"
+   ]
+  },
+  {
+   "index": 87,
+   "hex": "#B3B8CC",
+   "uv": [
+    0.46875,
+    0.3125
+   ],
+   "materials": [
+    "M_Rock"
+   ],
+   "used_in": [
+    "env",
+    "lobby"
+   ]
+  },
+  {
+   "index": 88,
+   "hex": "#C7CCE0",
+   "uv": [
+    0.53125,
+    0.3125
+   ],
+   "materials": [
+    "M_Steel"
+   ],
+   "used_in": [
+    "items"
+   ]
+  },
+  {
+   "index": 89,
+   "hex": "#2B2B30",
+   "uv": [
+    0.59375,
+    0.3125
+   ],
+   "materials": [
+    "M_Iron"
+   ],
+   "used_in": [
+    "items"
+   ]
+  },
+  {
+   "index": 90,
+   "hex": "#2E2E33",
+   "uv": [
+    0.65625,
+    0.3125
+   ],
+   "materials": [
+    "M_Eye"
+   ],
+   "used_in": [
+    "lobby",
+    "player"
+   ]
+  },
+  {
+   "index": 91,
+   "hex": "#3E3E44",
+   "uv": [
+    0.71875,
+    0.3125
+   ],
+   "materials": [
+    "M_Black",
+    "M_Seed"
+   ],
+   "used_in": [
+    "items",
+    "lobby",
+    "player",
+    "ship"
+   ]
+  },
+  {
+   "index": 92,
+   "hex": "#4C4C57",
+   "uv": [
+    0.78125,
+    0.3125
+   ],
+   "materials": [
+    "M_Basalt",
+    "Terrain_Basalt"
+   ],
+   "used_in": [
+    "env",
+    "terrain"
+   ]
+  },
+  {
+   "index": 93,
+   "hex": "#6B6B78",
+   "uv": [
+    0.84375,
+    0.3125
+   ],
+   "materials": [
+    "M_BasaltLight"
+   ],
+   "used_in": [
+    "env"
+   ]
+  },
+  {
+   "index": 94,
+   "hex": "#EBEBF2",
+   "uv": [
+    0.90625,
+    0.3125
+   ],
+   "materials": [
+    "M_Sail",
+    "M_White"
+   ],
+   "used_in": [
+    "env",
+    "lobby",
+    "player",
+    "ship"
+   ]
+  },
+  {
+   "index": 95,
+   "hex": "#FAFAFC",
+   "uv": [
+    0.96875,
+    0.3125
+   ],
+   "materials": [
+    "M_White"
+   ],
+   "used_in": [
+    "env",
+    "items",
+    "lobby",
+    "ship"
+   ]
+  },
+  {
+   "index": 96,
+   "hex": "#8C878C",
+   "uv": [
+    0.03125,
+    0.1875
+   ],
+   "materials": [
+    "M_Ash",
+    "Terrain_Ash"
+   ],
+   "used_in": [
+    "env",
+    "terrain"
+   ]
+  }
+ ]
+}
