@@ -11,6 +11,30 @@ float _LetsailWaveCount;
 float _LetsailOceanTime;
 float _LetsailSeaLevel;
 
+// 위치마다 다른 파도 세기 (0~1). OceanSystem.AmplitudeAt 과 같은 공식.
+#define LETSAIL_MAX_WEATHER_CELLS 8
+float _LetsailWaveAmpBase;
+float4 _LetsailWaveAmpCells[LETSAIL_MAX_WEATHER_CELLS]; // (x, z, 반지름, 더하는 세기)
+float _LetsailWaveAmpCellCount;
+
+float LetsailWaveAmplitude(float2 xz)
+{
+    float a = _LetsailWaveAmpBase;
+    int count = (int)_LetsailWaveAmpCellCount;
+    [unroll]
+    for (int i = 0; i < LETSAIL_MAX_WEATHER_CELLS; i++)
+    {
+        if (i >= count)
+        {
+            break;
+        }
+        float4 c = _LetsailWaveAmpCells[i];
+        float t = saturate(1.0 - length(xz - c.xy) / max(1.0, c.z));
+        a += c.w * t * t * (3.0 - 2.0 * t);
+    }
+    return saturate(a);
+}
+
 static const float LETSAIL_GRAVITY = 9.81;
 static const float LETSAIL_TWO_PI = 6.28318530718;
 
@@ -35,7 +59,7 @@ float3 LetsailGerstnerDisplacement(float2 origin, float time)
         d.y += a * sin(f);
         d.z += w.y * a * cs;
     }
-    return d;
+    return d * LetsailWaveAmplitude(origin);
 }
 
 #endif

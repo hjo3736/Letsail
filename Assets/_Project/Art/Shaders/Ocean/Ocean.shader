@@ -63,6 +63,7 @@ Shader "Letsail/Ocean"
                 float4 positionCS : SV_POSITION;
                 float3 positionWS : TEXCOORD0;
                 float waveHeight : TEXCOORD1;
+                float amplitude : TEXCOORD3;
                 float fogFactor : TEXCOORD2;
             };
 
@@ -76,6 +77,7 @@ Shader "Letsail/Ocean"
 
                 output.positionWS = positionWS;
                 output.waveHeight = d.y;
+                output.amplitude = LetsailWaveAmplitude(positionWS.xz - d.xz);
                 output.positionCS = TransformWorldToHClip(positionWS);
                 output.fogFactor = ComputeFogFactor(output.positionCS.z);
                 return output;
@@ -93,7 +95,9 @@ Shader "Letsail/Ocean"
                 if (!isFrontFace)
                 {
                     float shimmer = 0.85 + 0.15 * saturate(input.waveHeight / _ColorHeightRange * 0.5 + 0.5);
-                    return half4(MixFog(_UnderSurfaceColor.rgb * shimmer, input.fogFactor), 1);
+                    half3 skyUnder = SampleSH(half3(0, 1, 0));
+                    half underBright = saturate(max(skyUnder.r, max(skyUnder.g, skyUnder.b)) * 1.4 + 0.1);
+                    return half4(MixFog(_UnderSurfaceColor.rgb * shimmer * underBright, input.fogFactor), 1);
                 }
 
                 // 면 단위 법선: 삼각형마다 하나의 방향이라 각진 로우폴리 음영이 된다.
@@ -102,7 +106,9 @@ Shader "Letsail/Ocean"
 
                 float h = saturate(input.waveHeight / _ColorHeightRange * 0.5 + 0.5);
                 half3 color = lerp(_DeepColor.rgb, _ShallowColor.rgb, h);
-                float crest = smoothstep(_CrestHeight - _CrestSoftness, _CrestHeight + _CrestSoftness, input.waveHeight);
+                // 큰 파도일수록 거품이 생기는 높이도 올려서, 폭풍 바다가 온통 하얗게 되지 않게 한다.
+                float crestHeight = _CrestHeight * max(1.0, input.amplitude * 2.0);
+                float crest = smoothstep(crestHeight - _CrestSoftness, crestHeight + _CrestSoftness, input.waveHeight);
                 color = lerp(color, _CrestColor.rgb, crest);
 
                 Light mainLight = GetMainLight(TransformWorldToShadowCoord(input.positionWS));
@@ -117,7 +123,10 @@ Shader "Letsail/Ocean"
                 float fresnel = pow(1.0 - saturate(dot(normalWS, viewDirWS)), _FresnelPower);
 
                 half3 finalColor = color * lighting;
-                finalColor = lerp(finalColor, _FresnelColor.rgb, fresnel * 0.6);
+                // 하늘이 어두우면(밤·폭풍) 수면에 비치는 하늘빛도 어둡다.
+                half3 skyUp = SampleSH(half3(0, 1, 0));
+                half skyBright = saturate(max(skyUp.r, max(skyUp.g, skyUp.b)) * 1.3 + dot(mainLight.color, half3(0.3, 0.5, 0.2)) * 0.3);
+                finalColor = lerp(finalColor, _FresnelColor.rgb * skyBright, fresnel * 0.6);
                 finalColor = MixFog(finalColor, input.fogFactor);
                 return half4(finalColor, 1);
             }

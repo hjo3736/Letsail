@@ -65,6 +65,8 @@ namespace Letsail.Ocean
             SetUnderwater(below);
             if (underwater)
             {
+                // 하늘(낮밤·날씨)이 매 프레임 안개를 바꾸므로 물속에서는 매 프레임 덮어쓴다.
+                ApplyWaterFog();
                 AnimateCaustics();
             }
         }
@@ -99,12 +101,7 @@ namespace Letsail.Ocean
                 savedClearFlags = cam.clearFlags;
                 savedBackground = cam.backgroundColor;
 
-                RenderSettings.fog = true;
-                RenderSettings.fogMode = FogMode.Exponential;
-                RenderSettings.fogColor = waterColor;
-                RenderSettings.fogDensity = fogDensity;
-                cam.clearFlags = CameraClearFlags.SolidColor;
-                cam.backgroundColor = waterColor;
+                ApplyWaterFog();
                 BeginCaustics();
             }
             else
@@ -120,6 +117,19 @@ namespace Letsail.Ocean
                 }
                 EndCaustics();
             }
+        }
+
+        void ApplyWaterFog()
+        {
+            RenderSettings.fog = true;
+            RenderSettings.fogMode = FogMode.Exponential;
+            // 밤이나 폭풍이면 물속도 어둡다.
+            Color color = waterColor * Mathf.Lerp(0.25f, 1f, Letsail.World.SkyController.Daylight);
+            color.a = 1f;
+            RenderSettings.fogColor = color;
+            RenderSettings.fogDensity = fogDensity;
+            cam.clearFlags = CameraClearFlags.SolidColor;
+            cam.backgroundColor = color;
         }
 
         void BeginCaustics()

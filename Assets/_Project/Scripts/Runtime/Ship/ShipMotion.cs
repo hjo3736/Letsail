@@ -41,8 +41,20 @@ namespace Letsail.Ship
         [SerializeField, Tooltip("이 속도(m/s)가 되어야 키가 제대로 먹는다")] float fullSteerSpeed = 2.5f;
         [SerializeField, Tooltip("멈춰 있을 때도 키로 돌 수 있는 비율")] float minSteer = 0.15f;
 
+        [Header("좌초")]
+        [SerializeField, Tooltip("섬 지형·바위 레이어. 비우면 \"Island\" 레이어")] LayerMask groundMask;
+        [SerializeField, Tooltip("배 바닥이 수면에서 이 깊이(m)보다 얕은 바닥에 닿으면 막힌다")] float keelDepth = 1.6f;
+        [SerializeField, Tooltip("바닥을 재는 곳 (배 기준 x, z): 뱃머리, 고물, 양옆")]
+        Vector2[] keelPoints =
+        {
+            new Vector2(0f, 8.6f), new Vector2(0f, -7.2f), new Vector2(-3.1f, 0f), new Vector2(3.1f, 0f),
+            new Vector2(-2.35f, 5f), new Vector2(2.35f, 5f), new Vector2(-2.35f, -5f), new Vector2(2.35f, -5f),
+        };
+        [SerializeField, Tooltip("부딪혔을 때 뒤로 튕겨 나오는 속도 (m/s)")] float bounceSpeed = 0.8f;
+
         Rigidbody body;
         InteractionHub hub;
+        SailWind sailWind;
         int helmIndex = -1;
         int[] sailIndices;
         float heading;
@@ -57,7 +69,7 @@ namespace Letsail.Ship
         static readonly System.Collections.Generic.List<ShipMotion> ships = new System.Collections.Generic.List<ShipMotion>();
 
         [SerializeField, Tooltip("이 상자 안(배 기준)에 있으면 배에 탄 것으로 본다 (최소, 최대)")]
-        Bounds aboardBounds = new Bounds(new Vector3(0f, 6.5f, 1f), new Vector3(7.2f, 19f, 21f));
+        Bounds aboardBounds = new Bounds(new Vector3(0f, 6.5f, 1f), new Vector3(9f, 19f, 21f));
 
         /// <summary>위치가 어느 배 위(갑판, 선창, 돛대 포함)인지. 없으면 null.</summary>
         public static ShipMotion FindShipUnder(Vector3 worldPosition)
@@ -85,12 +97,26 @@ namespace Letsail.Ship
         /// <summary>지금 속도 (m/s, 앞쪽).</summary>
         public float Speed { get; private set; }
 
+        /// <summary>지금 바람·활대 각도로 돛이 내는 힘 비율 (upwindEfficiency ~ 1). 서버에서 계산한다.</summary>
+        public float SailEfficiency { get; private set; }
+
+        /// <summary>섬이나 얕은 바닥에 걸려 있다.</summary>
+        public bool Grounded { get; private set; }
+
+        /// <summary>섬·바위에 부딪혔을 때 (부딪힌 속도, m/s). 나중에 배 손상에 쓴다. 서버에서만 불린다.</summary>
+        public event System.Action<float> Collided;
+
         bool Simulates => !IsSpawned || IsServer;
 
         void Awake()
         {
             body = GetComponent<Rigidbody>();
             hub = GetComponent<InteractionHub>();
+            sailWind = GetComponent<SailWind>();
+            if (groundMask.value == 0)
+            {
+                groundMask = LayerMask.GetMask("Island");
+            }
         }
 
         void Start()
@@ -120,6 +146,7 @@ namespace Letsail.Ship
                 heave = transform.position.y;
             }
 
+            float previousHeading = heading;
             if (!docked)
             {
                 UpdateSailing(dt);
@@ -132,7 +159,10 @@ namespace Letsail.Ship
             Vector3 center = body.position;
             if (!docked)
             {
-                center += forward * (Speed * dt);
+                center = MoveWithGrounding(center, forward, previousHeading, dt);
+                yaw = Quaternion.Euler(0f, heading, 0f);
+                forward = yaw * Vector3.forward;
+                right = yaw * Vector3.right;
             }
 
             var ocean = OceanSystem.Instance;
@@ -155,6 +185,55 @@ namespace Letsail.Ship
             body.MoveRotation(yaw * Quaternion.Euler(pitch, 0f, roll));
         }
 
+        // 이번 칸에서 갈 자리. 배 바닥이 섬·얕은 바닥·바위에 닿으면 그쪽으로 못 가고 살짝 튕겨 나온다.
+        // 이미 걸린 채로 시작했으면(겹쳐 생겨난 경우 등) 빠져나갈 수 있게 막지 않는다.
+        Vector3 MoveWithGrounding(Vector3 center, Vector3 forward, float previousHeading, float dt)
+        {
+            Vector3 next = center + forward * (Speed * dt);
+            if (groundMask.value == 0 || !Blocked(next, heading))
+            {
+                Grounded = false;
+                return next;
+            }
+            if (Blocked(center, previousHeading))
+            {
+                Grounded = true;
+                return next;
+            }
+            Grounded = true;
+            if (Blocked(center, heading))
+            {
+                // 돌기만 해도 닿으면 돌지 않는다.
+                heading = previousHeading;
+            }
+            if (Speed > 0.05f)
+            {
+                Collided?.Invoke(Speed);
+                Speed = -bounceSpeed * Mathf.Clamp01(Speed / 2f);
+            }
+            else if (Speed < -0.05f)
+            {
+                Speed = 0f;
+            }
+            return center;
+        }
+
+        bool Blocked(Vector3 center, float headingDegrees)
+        {
+            float seaLevel = OceanSystem.Instance != null ? OceanSystem.Instance.SeaLevel : 0f;
+            Quaternion yaw = Quaternion.Euler(0f, headingDegrees, 0f);
+            foreach (var point in keelPoints)
+            {
+                Vector3 p = center + yaw * new Vector3(point.x, 0f, point.y);
+                var ray = new Ray(new Vector3(p.x, seaLevel + 40f, p.z), Vector3.down);
+                if (Physics.Raycast(ray, out var hit, 80f, groundMask, QueryTriggerInteraction.Ignore) && hit.point.y > seaLevel - keelDepth)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         void UpdateSailing(float dt)
         {
             float sail = 0f;
@@ -175,12 +254,23 @@ namespace Letsail.Ship
             bool anchored = anchor != null && anchor.IsOn;
 
             var weather = WeatherSystem.Instance;
-            float windSpeed = weather != null ? weather.WindSpeed : 5f;
+            float windSpeed = weather != null ? weather.WindSpeedAt(body.position) : 5f;
             Vector3 windDir = weather != null ? weather.WindDirection : Vector3.forward;
-            Vector3 forward = Quaternion.Euler(0f, heading, 0f) * Vector3.forward;
-            // 바람을 등지면(바람과 같은 쪽으로 가면) 가장 빠르고, 정면으로 받으면 힘이 조금만 남는다.
-            float downwind = Mathf.Clamp01(Vector3.Dot(forward, windDir) * 0.5f + 0.5f);
-            float efficiency = Mathf.Lerp(upwindEfficiency, 1f, downwind);
+            float drive;
+            if (sailWind != null)
+            {
+                // 활대를 바람 쪽으로 돌린 만큼 돛이 바람을 받고, 그 힘의 앞쪽 성분만큼 나아간다 (돛 모습과 같은 계산).
+                float windLocal = Mathf.DeltaAngle(heading, weather != null ? weather.WindAngle : heading);
+                drive = sailWind.DriveFor(windLocal);
+            }
+            else
+            {
+                // 돛 모습이 없으면: 바람을 등지면 가장 빠르고, 정면으로 받으면 힘이 조금만 남는다.
+                Vector3 forward = Quaternion.Euler(0f, heading, 0f) * Vector3.forward;
+                drive = Mathf.Clamp01(Vector3.Dot(forward, windDir) * 0.5f + 0.5f);
+            }
+            float efficiency = Mathf.Lerp(upwindEfficiency, 1f, drive);
+            SailEfficiency = efficiency;
             float targetSpeed = anchored ? 0f : Mathf.Min(maxSpeed, sail * windSpeed * speedPerWind * efficiency);
 
             float rate = targetSpeed > Speed ? acceleration : (anchored ? deceleration * 4f : deceleration);
