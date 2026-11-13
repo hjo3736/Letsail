@@ -311,6 +311,7 @@ GameObject:
   - component: {fileID: 566377982238818633}
   - component: {fileID: 79454372930448909}
   - component: {fileID: 1730918125855673685}
+  - component: {fileID: 8644482516083548498}
   m_Layer: 0
   m_Name: playership_001
   m_TagString: Untagged
@@ -480,9 +481,23 @@ MonoBehaviour:
   maxTurnRate: 10
   fullSteerSpeed: 2.5
   minSteer: 0.15
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  keelDepth: 1.6
+  keelPoints:
+  - {x: 0, y: 8.6}
+  - {x: 0, y: -7.2}
+  - {x: -3.1, y: 0}
+  - {x: 3.1, y: 0}
+  - {x: -2.35, y: 5}
+  - {x: 2.35, y: 5}
+  - {x: -2.35, y: -5}
+  - {x: 2.35, y: -5}
+  bounceSpeed: 0.8
   aboardBounds:
     m_Center: {x: 0, y: 6.5, z: 1}
-    m_Extent: {x: 3.6, y: 9.5, z: 10.5}
+    m_Extent: {x: 4.5, y: 9.5, z: 10.5}
 --- !u!114 &1730918125855673685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,6 +512,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: Letsail.Runtime::Letsail.Ship.WindVane
   flag: {fileID: 5095153522523960469}
   sharpness: 3
+--- !u!114 &8644482516083548498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8021979015480145695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2441f9483510544fb8cf8f60b16e368, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Letsail.Runtime::Letsail.Ship.SailWind
+  calmWind: 2
+  fullWind: 10
+  minFill: 0.2
+  luffAmount: 0.35
+  luffFrequency: 3.5
+  gustAmount: 0.3
+  gustFrequency: 0.8
+  flutterAmount: 0.08
+  flutterFrequency: 7
+  response: 2.5
+  jibTackSpeed: 1.2
 --- !u!1 &8849603053180203458
 GameObject:
   m_ObjectHideFlags: 0
@@ -4894,8 +4932,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Letsail.Runtime::Letsail.Ocean.HullWaterMask
   mask: {fileID: 2800000, guid: 20045839bd5c14e439da18c63081c097, type: 2}
-  boundsMin: {x: -2.8637502, y: -7.7800007}
-  boundsSize: {x: 5.73, y: 17.279999}
+  boundsMin: {x: -3.704111, y: -7.7800007}
+  boundsSize: {x: 7.41, y: 17.279999}
 --- !u!1 &8363495388638667044 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1817035968386021626, guid: 7ca9e0c3ac86a5b4f96d3565f9b8a994, type: 3}
