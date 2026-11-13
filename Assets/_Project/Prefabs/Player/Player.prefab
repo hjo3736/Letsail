@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 1290660422
   InScenePlacedSourceGlobalObjectIdHash: 0
   m_InScenePlacedDisabledByDefault: 0
   DeferredDespawnTick: 0
@@ -337,6 +337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Letsail.Runtime::Letsail.Networking.ShipRelativeSync
   ShowTopMostFoldoutHeaderGroup: 1
   smoothing: 18
+  handoverSpeed: 14
 --- !u!114 &5445682397751756131
 MonoBehaviour:
   m_ObjectHideFlags: 0
