@@ -536,12 +536,21 @@ MonoBehaviour:
     waveHeight: 2.2
     waveLength: 1.6
     windSpeed: 16
+  regional: 1
   startPreset: 1
-  transitionSeconds: 30
-  autoChange: 1
-  changeInterval: {x: 90, y: 180}
-  maxAutoPreset: 2
   devKeys: 1
+  regionalWaveLength: 1.2
+  baseLevel: 0.95
+  baseSwing: {x: 0.25, y: 900}
+  mapRadius: 1400
+  cellCount: 8
+  cellRadius: {x: 250, y: 520}
+  cellLifetime: {x: 240, y: 480}
+  cellDrift: {x: 1.5, y: 5}
+  storm: {x: 1.35, y: 0.3}
+  rough: {x: 0.6, y: 0.4}
+  calm: 0.55
+  levelRange: {x: 0.4, y: 2.3}
 --- !u!1 &467272675
 GameObject:
   m_ObjectHideFlags: 0
@@ -1311,6 +1320,80 @@ MonoBehaviour:
   spawnDistance: {x: 150, y: 1100}
   islandGap: 60
   fixedSeed: 0
+--- !u!1 &1136101547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1136101549}
+  - component: {fileID: 1136101548}
+  m_Layer: 0
+  m_Name: Sky
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1136101548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136101547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ae32ac38596d074488694de93ce5ff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Letsail.Runtime::Letsail.World.SkyController
+  cycle: 1
+  dayLengthMinutes: 20
+  startHour: 8
+  fixedHour: 10
+  sunAzimuth: -30
+  sun: {fileID: 1027053357}
+  dayColor: {r: 1, g: 0.957, b: 0.878, a: 1}
+  duskColor: {r: 1, g: 0.62, b: 0.38, a: 1}
+  moonColor: {r: 0.55, g: 0.65, b: 0.95, a: 1}
+  dayIntensity: 1.15
+  moonIntensity: 0.28
+  daySky: {r: 0.6, g: 0.69, b: 0.77, a: 1}
+  dayEquator: {r: 0.65, g: 0.71, b: 0.75, a: 1}
+  dayGround: {r: 0.43, g: 0.4, b: 0.35, a: 1}
+  duskEquator: {r: 0.75, g: 0.52, b: 0.45, a: 1}
+  nightSky: {r: 0.07, g: 0.09, b: 0.17, a: 1}
+  nightEquator: {r: 0.06, g: 0.08, b: 0.13, a: 1}
+  nightGround: {r: 0.03, g: 0.03, b: 0.04, a: 1}
+  dayFog: {r: 0.81, g: 0.89, b: 0.93, a: 1}
+  duskFog: {r: 0.86, g: 0.66, b: 0.56, a: 1}
+  nightFog: {r: 0.05, g: 0.07, b: 0.12, a: 1}
+  stormFog: {r: 0.42, g: 0.47, b: 0.52, a: 1}
+  clearFogRange: {x: 300, y: 1500}
+  stormFogRange: {x: 30, y: 320}
+  daySkyExposure: 1.3
+  nightSkyExposure: 0.12
+  weatherResponse: 0.5
+  rainMaterial: {fileID: 2100000, guid: 84d5eaa1ee567d04f9b8dc7695a50173, type: 2}
+  maxRain: 2500
+  lightningFrom: 0.75
+--- !u!4 &1136101549
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136101547}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1279594044
 GameObject:
   m_ObjectHideFlags: 0
@@ -1359,6 +1442,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Letsail.Runtime::Letsail.Ocean.OceanSurface
   size: 256
   cellSize: 2
+  farDistance: 2500
+  farRings: 14
   follow: {fileID: 0}
 --- !u!23 &1279594047
 MeshRenderer:
@@ -1417,6 +1502,86 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1279594044}
   m_Mesh: {fileID: 0}
+--- !u!1 &1296001402
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1296001404}
+  - component: {fileID: 1296001403}
+  - component: {fileID: 1296001405}
+  m_Layer: 0
+  m_Name: SoakTester
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1296001403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296001402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 584798563
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  m_InScenePlacedDisabledByDefault: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  m_InScenePlaced: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
+--- !u!4 &1296001404
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296001402}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1296001405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296001402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b175a11a75b8947a23c598d7a45087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Letsail.Runtime::Letsail.Testing.SoakTester
+  ShowTopMostFoldoutHeaderGroup: 1
+  settleTicks: 3
+  clientSettleTicks: 7
+  teleportSettleTicks: 12
+  retries: 5
+  reportTimeout: 4
+  shipTolerance: 0.6
+  playerTolerance: 0.35
 --- !u!1 &1320075203
 GameObject:
   m_ObjectHideFlags: 0
@@ -1982,3 +2147,5 @@ SceneRoots:
   - {fileID: 1438651749}
   - {fileID: 450063705}
   - {fileID: 1112648395}
+  - {fileID: 1136101549}
+  - {fileID: 1296001404}

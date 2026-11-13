@@ -523,6 +523,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Letsail.Runtime::Letsail.Ocean.OceanSurface
   size: 256
   cellSize: 2
+  farDistance: 2500
+  farRings: 14
   follow: {fileID: 0}
 --- !u!23 &707815301
 MeshRenderer:
@@ -671,12 +673,21 @@ MonoBehaviour:
     waveHeight: 2.2
     waveLength: 1.6
     windSpeed: 16
+  regional: 0
   startPreset: 0
-  transitionSeconds: 30
-  autoChange: 0
-  changeInterval: {x: 90, y: 180}
-  maxAutoPreset: 2
   devKeys: 1
+  regionalWaveLength: 1.2
+  baseLevel: 0.95
+  baseSwing: {x: 0.25, y: 900}
+  mapRadius: 1400
+  cellCount: 8
+  cellRadius: {x: 250, y: 520}
+  cellLifetime: {x: 240, y: 480}
+  cellDrift: {x: 1.5, y: 5}
+  storm: {x: 1.35, y: 0.3}
+  rough: {x: 0.6, y: 0.4}
+  calm: 0.55
+  levelRange: {x: 0.4, y: 2.3}
 --- !u!1 &945306290
 GameObject:
   m_ObjectHideFlags: 0
@@ -996,6 +1007,80 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1267879719}
   m_CullTransparentMesh: 1
+--- !u!1 &1493872410
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1493872412}
+  - component: {fileID: 1493872411}
+  m_Layer: 0
+  m_Name: Sky
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1493872411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493872410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ae32ac38596d074488694de93ce5ff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Letsail.Runtime::Letsail.World.SkyController
+  cycle: 0
+  dayLengthMinutes: 20
+  startHour: 8
+  fixedHour: 10
+  sunAzimuth: -30
+  sun: {fileID: 4434258}
+  dayColor: {r: 1, g: 0.957, b: 0.878, a: 1}
+  duskColor: {r: 1, g: 0.62, b: 0.38, a: 1}
+  moonColor: {r: 0.55, g: 0.65, b: 0.95, a: 1}
+  dayIntensity: 1.15
+  moonIntensity: 0.28
+  daySky: {r: 0.6, g: 0.69, b: 0.77, a: 1}
+  dayEquator: {r: 0.65, g: 0.71, b: 0.75, a: 1}
+  dayGround: {r: 0.43, g: 0.4, b: 0.35, a: 1}
+  duskEquator: {r: 0.75, g: 0.52, b: 0.45, a: 1}
+  nightSky: {r: 0.07, g: 0.09, b: 0.17, a: 1}
+  nightEquator: {r: 0.06, g: 0.08, b: 0.13, a: 1}
+  nightGround: {r: 0.03, g: 0.03, b: 0.04, a: 1}
+  dayFog: {r: 0.81, g: 0.89, b: 0.93, a: 1}
+  duskFog: {r: 0.86, g: 0.66, b: 0.56, a: 1}
+  nightFog: {r: 0.05, g: 0.07, b: 0.12, a: 1}
+  stormFog: {r: 0.42, g: 0.47, b: 0.52, a: 1}
+  clearFogRange: {x: 300, y: 1500}
+  stormFogRange: {x: 30, y: 320}
+  daySkyExposure: 1.3
+  nightSkyExposure: 0.12
+  weatherResponse: 0.5
+  rainMaterial: {fileID: 2100000, guid: 84d5eaa1ee567d04f9b8dc7695a50173, type: 2}
+  maxRain: 2500
+  lightningFrom: 0.75
+--- !u!4 &1493872412
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493872410}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1508674624
 GameObject:
   m_ObjectHideFlags: 0
@@ -2389,7 +2474,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7163385998639278701, guid: b0bd8a60093d8844fadc6e015cec4aa2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.25
+      value: -15.136
       objectReference: {fileID: 0}
     - target: {fileID: 7163385998639278701, guid: b0bd8a60093d8844fadc6e015cec4aa2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3310,3 +3395,4 @@ SceneRoots:
   - {fileID: 1992814883}
   - {fileID: 1930089554}
   - {fileID: 929324121}
+  - {fileID: 1493872412}
