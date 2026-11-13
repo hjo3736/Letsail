@@ -241,7 +241,8 @@ namespace Letsail.Player
             bool insideHull = Letsail.Ocean.HullWaterMask.IsInsideHull(position + Vector3.up * 0.5f);
             if (!IsSwimming)
             {
-                if (!IsGrounded && !insideHull && depth > swimDepth - 0.05f)
+                // 떨어지다 물에 들어가거나, 걸어서 가슴 높이보다 깊이 들어가면 헤엄친다.
+                if (!insideHull && ((!IsGrounded && depth > swimDepth - 0.05f) || depth > swimDepth + 0.15f))
                 {
                     IsSwimming = true;
                     IsCrouching = false;

@@ -125,7 +125,7 @@ namespace Letsail.Editor
                         {
                             instance.AddComponent<PcgInfo>().CopyFrom(info);
                         }
-                        AddColliders(instance, info.collider);
+                        AddColliders(instance, info.colliderType);
                         AddAttachLights(instance);
                         if (info.category == "floating")
                         {

@@ -10,7 +10,7 @@ namespace Letsail.World.Islands
     {
         [Tooltip("beach, jungle, volcanic, sea, common")] public string biome;
         [Tooltip("tree, bush, plant, detail, rock, log, cliff, hazard, sea_rock, reef, floating, landmark")] public string category;
-        [Tooltip("none, box, capsule, mesh")] public string collider;
+        [Tooltip("none, box, capsule, mesh"), UnityEngine.Serialization.FormerlySerializedAs("collider")] public string colliderType;
         [Tooltip("차지하는 반경 (m). 같은 종류끼리 이 거리 안에 겹치지 않는다")] public float radius = 1f;
         public float slopeMax = 30f;
         public float heightMin;
@@ -23,7 +23,7 @@ namespace Letsail.World.Islands
         {
             biome = other.biome;
             category = other.category;
-            collider = other.collider;
+            colliderType = other.colliderType;
             radius = other.radius;
             slopeMax = other.slopeMax;
             heightMin = other.heightMin;

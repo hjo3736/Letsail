@@ -81,7 +81,7 @@ namespace Letsail.Editor
                     {
                         case "pcg_biome": info.biome = v as string; break;
                         case "pcg_category": info.category = v as string; break;
-                        case "pcg_collider": info.collider = v as string; break;
+                        case "pcg_collider": info.colliderType = v as string; break;
                         case "pcg_radius": info.radius = ToFloat(v); break;
                         case "pcg_slope_max": info.slopeMax = ToFloat(v); break;
                         case "pcg_height_min": info.heightMin = ToFloat(v); break;

@@ -56,6 +56,24 @@ namespace Letsail.World.Islands
         [SerializeField] IslandBiome previewBiome;
         [SerializeField] float previewRadius = 20f;
 
+        static int islandLayer = -2;
+
+        /// <summary>섬 지형과 바위 레이어 ("Island"). 배 좌초 판정이 쓴다. 레이어가 없으면 Default.</summary>
+        public static int IslandLayer
+        {
+            get
+            {
+                if (islandLayer == -2) islandLayer = Mathf.Max(0, LayerMask.NameToLayer("Island"));
+                return islandLayer;
+            }
+        }
+
+        static void SetLayer(Transform t, int layer)
+        {
+            t.gameObject.layer = layer;
+            for (int i = 0; i < t.childCount; i++) SetLayer(t.GetChild(i), layer);
+        }
+
         Shape shape;
         Zone[] triangleZones;
         MeshCollider terrainCollider;
@@ -162,6 +180,7 @@ namespace Letsail.World.Islands
             var terrain = new GameObject("Terrain");
             terrain.transform.SetParent(transform, false);
             terrain.isStatic = true;
+            terrain.layer = IslandLayer;
             terrain.AddComponent<MeshFilter>().sharedMesh = mesh;
             var renderer = terrain.AddComponent<MeshRenderer>();
             renderer.sharedMaterial = terrainMaterial;
@@ -332,6 +351,11 @@ namespace Letsail.World.Islands
             instance.transform.localPosition = new Vector3(p.x, y, p.y);
             instance.transform.localRotation = rotation;
             instance.transform.localScale = Vector3.one * scale;
+            // 배가 막히는 것(지형·바위·절벽 등)은 Island 레이어. 떠다니는 것과 해저 산호는 배가 지나간다.
+            if (info.category != "floating" && info.category != "reef")
+            {
+                SetLayer(instance.transform, IslandLayer);
+            }
             placed.Add(new Placed { position = p, radius = radius * scale, detail = detail });
             return true;
         }
