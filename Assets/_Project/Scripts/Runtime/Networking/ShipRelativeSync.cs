@@ -72,6 +72,8 @@ namespace Letsail.Networking
             }
             bool swimming = motor != null && motor.IsSwimming;
             var ship = swimming ? null : ShipMotion.FindShipUnder(transform.position);
+            // 네트워크에 올라가지 않은 배(로비 장식 등)는 배 기준으로 보낼 수 없다.
+            if (ship != null && (ship.NetworkObject == null || !ship.NetworkObject.IsSpawned)) ship = null;
             var value = new ShipPose { OnShip = ship != null };
             if (ship != null)
             {
