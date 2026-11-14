@@ -10,6 +10,20 @@ namespace Letsail.World.Islands
         Volcanic,
     }
 
+    /// <summary>섬 지면의 종류 (동물을 놓을 때 쓴다).</summary>
+    public enum IslandSurface : byte
+    {
+        None,
+        Seabed,
+        Beach,
+        Grass,
+        Jungle,
+        Dirt,
+        Rock,
+        /// <summary>화산재·현무암.</summary>
+        Volcanic,
+    }
+
     /// <summary>
     /// 섬 하나를 시드로 만든다. 같은 시드면 어느 PC 에서든 똑같은 섬이 나온다 (System.Random 과 Perlin 노이즈만 쓴다).
     /// 1. 섬 모양: 타원 + 해안선 노이즈. 해변 띠 → 내륙 평원 → 언덕, 한쪽에 바위 절벽 (화산섬은 가운데 분화구).
@@ -85,6 +99,36 @@ namespace Letsail.World.Islands
 
         /// <summary>얕은 바닥까지 포함한 반지름 (m). 섬끼리 이만큼 떨어뜨린다.</summary>
         public float OuterRadius => Radius + shelfWidth + 4f;
+
+        /// <summary>
+        /// 이 위치(월드) 바로 아래 섬 지형. 섬 밖이면 false.
+        /// point 는 지면 위치(월드), height 는 해수면 기준 높이, slope 는 기울기(도).
+        /// </summary>
+        public bool SampleGround(Vector3 worldPosition, out Vector3 point, out float height, out float slope, out IslandSurface surface)
+        {
+            point = worldPosition;
+            height = -100f;
+            slope = 0f;
+            surface = IslandSurface.None;
+            if (terrainCollider == null) return false;
+            Vector3 top = new Vector3(worldPosition.x, transform.position.y + 80f, worldPosition.z);
+            if (!terrainCollider.Raycast(new Ray(top, Vector3.down), out var hit, 200f)) return false;
+            point = hit.point;
+            height = hit.point.y - transform.position.y;
+            slope = Vector3.Angle(hit.normal, Vector3.up);
+            Zone zone = hit.triangleIndex >= 0 && triangleZones != null && hit.triangleIndex < triangleZones.Length ? triangleZones[hit.triangleIndex] : Zone.Seabed;
+            surface = zone switch
+            {
+                Zone.Seabed => IslandSurface.Seabed,
+                Zone.SandWet or Zone.Sand => IslandSurface.Beach,
+                Zone.Grass => IslandSurface.Grass,
+                Zone.JungleGrass => IslandSurface.Jungle,
+                Zone.Dirt => IslandSurface.Dirt,
+                Zone.Rock => IslandSurface.Rock,
+                _ => IslandSurface.Volcanic,
+            };
+            return true;
+        }
 
         [ContextMenu("미리 만들기")]
         void Preview() => Generate(previewSeed, previewBiome, previewRadius);
