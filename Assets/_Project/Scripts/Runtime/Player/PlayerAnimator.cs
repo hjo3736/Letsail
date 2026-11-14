@@ -32,6 +32,11 @@ namespace Letsail.Player
             "Ladder_Enter_Bottom", "Ladder_Climb_Up", "Ladder_Climb_Down", "Ladder_Enter_Top", "Ladder_Idle",
             "Ratline_Climb_Up", "Ratline_Climb_Down", "RopeLadder_Climb_Up",
             "Swim_Idle", "Swim_Forward", "Water_Fall",
+            // 사냥 (무기, 줍기, 나르기)
+            "Punch", "Sword_Slash", "Dagger_Stab", "Pistol_Shoot", "Pistol_Reload", "Musket_Shoot", "Musket_Reload",
+            "Pickup", "Carry_Idle", "Carry_Walk", "Carry_Pickup", "Carry_PutDown",
+            // 체력 (맞기, 쓰러짐, 동료 일으키기)
+            "Hit_React", "Downed_Fall", "Downed_Idle", "Downed_GetUp", "Revive",
         };
 
         static readonly int SpeedId = Animator.StringToHash("Speed");
@@ -68,8 +73,17 @@ namespace Letsail.Player
         /// <summary>상호작용 동작의 재생 속도 (사다리를 빨리 오를 때 등). 평소 1.</summary>
         public float ActionSpeed { get; set; } = 1f;
 
-        /// <summary>지금 재생 중인 동작. 없으면 null. 헤엄치는 중이면 헤엄 동작.</summary>
-        public string CurrentAction => oneShot ?? baseAction ?? SwimAction;
+        /// <summary>두 손으로 무언가를 나르는 중 (고기 등). 걸으면 Carry_Walk, 서 있으면 Carry_Idle.</summary>
+        public bool Carrying { get; set; }
+
+        /// <summary>지금 재생 중인 동작. 없으면 null. 헤엄치는 중이면 헤엄 동작, 나르는 중이면 나르기 동작.</summary>
+        public string CurrentAction => oneShot ?? baseAction ?? SwimAction ?? CarryAction;
+
+        string CarryAction => Carrying && motor != null && !motor.IsSwimming
+            ? (motor.PlanarSpeed > 0.2f ? "Carry_Walk" : "Carry_Idle")
+            : null;
+
+        string queuedOnce;
 
         // 헤엄칠 때는 움직이면 앞으로 헤엄치기, 멈추면 떠 있기.
         // 잠수해서 위아래로 움직일 때도 헤엄치는 동작을 한다.
@@ -124,6 +138,17 @@ namespace Letsail.Player
             SetLock(holdStill);
         }
 
+        /// <summary>지금 한 번 재생 동작이 끝나면 이어서 재생한다 (쏜 뒤 장전 등). 재생 중이 아니면 바로 재생한다.</summary>
+        public void QueueOnce(string state)
+        {
+            if (oneShot == null)
+            {
+                PlayOnce(state);
+                return;
+            }
+            queuedOnce = state;
+        }
+
         /// <summary>재생 중인 한 번 재생 동작을 멈춘다.</summary>
         public void StopOnce()
         {
@@ -161,6 +186,12 @@ namespace Letsail.Player
                 if (oneShotRemaining <= 0f)
                 {
                     StopOnce();
+                    if (queuedOnce != null)
+                    {
+                        string next = queuedOnce;
+                        queuedOnce = null;
+                        PlayOnce(next);
+                    }
                 }
             }
             int action = IndexOf(CurrentAction);

@@ -42,20 +42,23 @@ namespace Letsail.UI
                 return;
             }
 
+            // 손에 든 것이 있으면 조작법을 함께 보인다.
+            string handsHint = Letsail.Items.PlayerHands.Local != null ? Letsail.Items.PlayerHands.Local.ControlsHint : null;
             Interactable target = interactor.Focused;
             if (target == null)
             {
-                Hide();
+                if (handsHint != null) Show("", Normal, 0f, handsHint);
+                else Hide();
                 return;
             }
             if (target.IsBlocked)
             {
-                Show($"{target.Prompt}  ·  {target.BlockedReason}", Dimmed, 0f, null);
+                Show($"{target.Prompt}  ·  {target.BlockedReason}", Dimmed, 0f, handsHint);
                 return;
             }
             bool hold = target.Mode == Interactable.InteractMode.Hold;
             string key = hold ? $"[{keyName} 길게]" : $"[{keyName}]";
-            Show($"{key}  {target.Prompt}", Normal, hold ? interactor.HoldProgress : 0f, null);
+            Show($"{key}  {target.Prompt}", Normal, hold ? interactor.HoldProgress : 0f, handsHint);
         }
 
         void Show(string text, Color color, float progress, string hint)
