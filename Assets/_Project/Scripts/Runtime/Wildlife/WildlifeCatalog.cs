@@ -19,7 +19,7 @@ namespace Letsail.Wildlife
         {
             foreach (var p in prefabs)
             {
-                if (p != null && (p.name == "Animal_" + species || p.name == "School_" + species)) return p;
+                if (p != null && (p.name == "Animal_" + species || p.name == "School_" + species || p.name == "Boss_" + species)) return p;
             }
             return null;
         }

@@ -40,8 +40,9 @@ namespace Letsail.Player
         public static PlayerHealth Local { get; private set; }
 
         public float Health => health.Value;
-        public float MaxHealth => maxHealth;
-        public float Health01 => maxHealth > 0f ? Mathf.Clamp01(health.Value / maxHealth) : 0f;
+        /// <summary>최대 체력 (배에 놓인 유물만큼 늘어난다. 유물 자리는 모두에게 맞춰지므로 모든 PC 가 같다).</summary>
+        public float MaxHealth => maxHealth + Letsail.Ship.ShipRelics.Bonus.maxHealth;
+        public float Health01 => MaxHealth > 0f ? Mathf.Clamp01(health.Value / MaxHealth) : 0f;
         public bool IsDowned => downed.Value;
 
         /// <summary>쓰러진 뒤 혼자 일어나기까지 남은 시간 (초).</summary>
@@ -93,9 +94,11 @@ namespace Letsail.Player
                 if (NetworkManager.ServerTime.Time >= downedAt.Value + selfReviveSeconds) ServerRevive(selfReviveHealth);
                 return;
             }
-            if (health.Value < maxHealth && Time.time - lastDamageTime > regenDelay)
+            if (health.Value < MaxHealth && Time.time - lastDamageTime > regenDelay)
             {
-                health.Value = Mathf.Min(maxHealth, health.Value + regenPerSecond * Time.deltaTime);
+                // 배에 놓인 유물이 재생을 빠르게 한다.
+                float regen = regenPerSecond * (1f + Letsail.Ship.ShipRelics.Bonus.healthRegen);
+                health.Value = Mathf.Min(MaxHealth, health.Value + regen * Time.deltaTime);
             }
         }
 
@@ -122,7 +125,7 @@ namespace Letsail.Player
         void ServerRevive(float ratio)
         {
             downed.Value = false;
-            health.Value = Mathf.Max(1f, maxHealth * ratio);
+            health.Value = Mathf.Max(1f, MaxHealth * ratio);
             lastDamageTime = Time.time;
             protectedUntil = Time.time + reviveProtection;
         }

@@ -16,7 +16,7 @@ namespace Letsail.Wildlife
     /// </summary>
     public sealed class WildlifeSpawner : NetworkBehaviour
     {
-        enum Spot { Beach, Shore, SkyLow, Inland, Jungle, DeepJungle, Volcanic, Perch, SkyCoast, SkyHigh, Cave, Reef, Shallow, OpenSea, Circle, SeaFloor }
+        enum Spot { BossLair, Beach, Shore, SkyLow, Inland, Jungle, DeepJungle, Volcanic, Perch, SkyCoast, SkyHigh, Cave, Reef, Shallow, OpenSea, Circle, SeaFloor }
 
         [System.Flags]
         enum Where { Tropical = 1, Volcanic = 2, Both = 3 }
@@ -55,6 +55,9 @@ namespace Letsail.Wildlife
         // README 의 섬 하나 기준 추천 마릿수
         static readonly Rule[] Rules =
         {
+            // 섬 보스 (섬마다 하나, 한가운데 근처)
+            new Rule("Tropical", Where.Tropical, Spot.BossLair, 1, 1, 10f),
+            new Rule("Volcanic", Where.Volcanic, Spot.BossLair, 1, 1, 10f),
             // 해변 (화산섬은 조금)
             new Rule("Crab", Where.Tropical, Spot.Beach, 4, 8, 6f),
             new Rule("Crab", Where.Volcanic, Spot.Beach, 2, 4, 6f),
@@ -388,6 +391,7 @@ namespace Letsail.Wildlife
                 {
                     case Spot.Beach: distance = radius * Lerp(0.6f, 1.15f, random); break;
                     case Spot.Shore: distance = radius * Lerp(0.85f, 1.15f, random); break;
+                    case Spot.BossLair: distance = radius * Lerp(0f, 0.4f, random); break;
                     case Spot.DeepJungle: distance = radius * Lerp(0f, 0.45f, random); break;
                     case Spot.Reef:
                     case Spot.Shallow: distance = radius * Lerp(0.95f, 1.25f, random); break;
@@ -400,6 +404,14 @@ namespace Letsail.Wildlife
                 bool volcanic = island.Biome == IslandBiome.Volcanic;
                 switch (rule.spot)
                 {
+                    case Spot.BossLair:
+                        // 보스: 섬 가운데 근처의 평평한 내륙 (싸울 자리가 있게)
+                        if (hit && height > 1.2f && slope < 22f && surface != IslandSurface.Beach && surface != IslandSurface.Rock)
+                        {
+                            spot = ground;
+                            return true;
+                        }
+                        break;
                     case Spot.Shore:
                         // 물가 모래 (물에 바로 들어갈 수 있는 곳)
                         if (hit && height > -0.25f && height < 0.5f && slope < 22f && (surface == IslandSurface.Beach || (volcanic && surface == IslandSurface.Volcanic)))

@@ -51,7 +51,10 @@ namespace Letsail.Items
         /// <summary>들고 있는 아이템. 빈손이면 null.</summary>
         public ItemDefinition Held => catalog != null ? catalog.Get(held.Value) : null;
 
-        public bool IsCarrying => Held != null && Held.kind == ItemKind.Carry;
+        public bool IsCarrying => TwoHanded(Held);
+
+        /// <summary>두 손으로 나르는 것 (고기·포탄·유물). 들고 있는 동안 공격하지 못한다.</summary>
+        public static bool TwoHanded(ItemDefinition item) => item != null && (item.kind == ItemKind.Carry || item.kind == ItemKind.Relic);
 
         /// <summary>화면 안내 (들고 있을 때 조작법). 빈손이면 null.</summary>
         public string ControlsHint
@@ -60,6 +63,8 @@ namespace Letsail.Items
             {
                 var item = Held;
                 if (item == null) return null;
+                if (item.kind == ItemKind.Relic)
+                    return $"{item.displayName} 나르는 중  ·  {item.relic.description}  ·  선장실 선반에 두면 선원 모두에게 효과  ·  G 내려놓기";
                 return item.kind == ItemKind.Carry
                     ? $"{item.displayName} 나르는 중  ·  G 내려놓기"
                     : $"{item.displayName}  ·  좌클릭 공격  ·  G 내려놓기";
@@ -142,7 +147,7 @@ namespace Letsail.Items
         void TryAttack()
         {
             var item = Held;
-            if (item != null && item.kind == ItemKind.Carry) return;
+            if (TwoHanded(item)) return;
             if (item != null && item.kind == ItemKind.Gun && motor != null && motor.IsSwimming) return;
 
             string action = item != null ? item.attackAction : punchAction;
@@ -230,7 +235,7 @@ namespace Letsail.Items
                 }
             }
             if (muzzle == null) muzzle = visual.transform;
-            MuzzleFlash.Spawn(item.fireEffect, muzzle.position, muzzle.rotation * Quaternion.Euler(-90f, 0f, 0f), item.fireEffectScale);
+            MeshEffect.Spawn(item.fireEffect, muzzle.position, muzzle.rotation * Quaternion.Euler(-90f, 0f, 0f), item.fireEffectScale);
         }
 
         [Rpc(SendTo.Server)]
@@ -243,10 +248,11 @@ namespace Letsail.Items
             // 들고 있는 무기와 맞는지, 거리가 말이 되는지 확인한다.
             bool holdingGun = item != null && item.kind == ItemKind.Gun;
             if (gun != holdingGun) return;
-            float maxDamage = item != null && item.kind != ItemKind.Carry ? item.damage : punchDamage;
-            float range = item != null && item.kind != ItemKind.Carry ? item.range : punchRange;
+            float maxDamage = item != null && !TwoHanded(item) ? item.damage : punchDamage;
+            float range = item != null && !TwoHanded(item) ? item.range : punchRange;
             if (Vector3.Distance(transform.position, targetObject.transform.position) > range + rangeTolerance) return;
-            target.ServerTakeDamage(Mathf.Min(damage, maxDamage), transform.position);
+            // 배에 놓인 유물이 무기 피해를 올린다.
+            target.ServerTakeDamage(Mathf.Min(damage, maxDamage) * (1f + Letsail.Ship.ShipRelics.Bonus.weaponDamage), transform.position);
         }
 
         // ───────────────────────── 줍기·내려놓기 ─────────────────────────
@@ -259,7 +265,7 @@ namespace Letsail.Items
             if (playerAnimator != null)
             {
                 var def = item.Definition;
-                playerAnimator.PlayOnce(def != null && def.kind == ItemKind.Carry ? "Carry_Pickup" : "Pickup", holdStill: true);
+                playerAnimator.PlayOnce(TwoHanded(def) ? "Carry_Pickup" : "Pickup", holdStill: true);
             }
         }
 
@@ -295,6 +301,12 @@ namespace Letsail.Items
             WorldItem.ServerSpawn(worldItemPrefab, id, point, Quaternion.LookRotation(forward).eulerAngles.y + 90f);
         }
 
+        /// <summary>서버: 들고 있는 것을 써서 없앤다 (대포에 포탄 넣기 등).</summary>
+        public void ServerConsume()
+        {
+            if (IsServer) held.Value = -1;
+        }
+
         /// <summary>서버: 손에 바로 쥐여 준다 (시작 장비 등). 들고 있던 것은 내려놓는다.</summary>
         public void ServerGive(int id)
         {
@@ -313,7 +325,7 @@ namespace Letsail.Items
             var item = Held;
             if (item == null || item.model == null || socket == null) return;
             // 나르는 것은 두 손 사이에 세워 든다 (LateUpdate 에서 자리를 맞춘다).
-            bool carry = item.kind == ItemKind.Carry && socketLeft != null;
+            bool carry = TwoHanded(item) && socketLeft != null;
             visual = Instantiate(item.model, carry ? transform : socket);
             visual.name = "Held_" + item.name;
             visual.transform.localPosition = Vector3.zero;

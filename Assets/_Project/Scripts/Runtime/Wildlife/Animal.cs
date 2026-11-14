@@ -102,6 +102,7 @@ namespace Letsail.Wildlife
         public WildInfo Info => info;
         public bool IsDead => dead.Value;
         public float Health => health;
+        public float MaxHealth => maxHealth;
 
         /// <summary>적대적(세력권에 들어온 선원을 먼저 공격) / 친화적(도망침).</summary>
         public Temperament Temperament => aggression != null && aggression.preemptive ? Temperament.Hostile : Temperament.Friendly;
