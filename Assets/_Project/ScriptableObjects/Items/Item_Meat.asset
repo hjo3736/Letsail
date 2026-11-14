@@ -24,5 +24,11 @@ MonoBehaviour:
   fireEffect: {fileID: 0}
   muzzleName: 
   fireEffectScale: 1
+  relic:
+    description: 
+    cannonDamage: 0
+    weaponDamage: 0
+    healthRegen: 0
+    maxHealth: 0
   restEuler: {x: 90, y: 0, z: 0}
   restHeight: 0.07

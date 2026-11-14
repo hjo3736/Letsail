@@ -312,6 +312,8 @@ GameObject:
   - component: {fileID: 79454372930448909}
   - component: {fileID: 1730918125855673685}
   - component: {fileID: 8644482516083548498}
+  - component: {fileID: 5635675643668686950}
+  - component: {fileID: 1597324335949580702}
   m_Layer: 0
   m_Name: playership_001
   m_TagString: Untagged
@@ -533,8 +535,57 @@ MonoBehaviour:
   gustFrequency: 0.8
   flutterAmount: 0.08
   flutterFrequency: 7
+  maxBrace: 25
+  braceSpeed: 12
   response: 2.5
   jibTackSpeed: 1.2
+--- !u!114 &5635675643668686950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8021979015480145695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed68d1c51dbac884db59c3fc180ac2cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Letsail.Runtime::Letsail.Ship.ShipCannons
+  ShowTopMostFoldoutHeaderGroup: 1
+  catalog: {fileID: 11400000, guid: 1513dc58f8f91834baef9649f7f2121a, type: 2}
+  cannonBallItem: Item_CannonBall
+  muzzleFlash: {fileID: 3212264764347644300, guid: 2af4c4f9e95cd70489cb168ec336fd81, type: 3}
+  trailEffect: {fileID: 8329449796692517877, guid: 32fb6ce0e1731f24d8e1c721c0ae8dff, type: 3}
+  explosionEffect: {fileID: 5012859864328952372, guid: 7f7f07ca91e29c64d91377ed031df616, type: 3}
+  splashEffect: {fileID: 4345406394816392131, guid: 22aaa972ae6abdd49a087304770f992d, type: 3}
+  impactEffect: {fileID: 8892380493744033180, guid: b01aec949b5899d4981c76930cbfe39b, type: 3}
+  ballModel: {fileID: 919132149155446097, guid: 60f347884ea6e9c428e08028d618fe57, type: 3}
+  basketFullModel: {fileID: 919132149155446097, guid: 0921266c6bf561740affcb674a73117d, type: 3}
+  basketEmptyModel: {fileID: 919132149155446097, guid: d0f8d1454ad5c8347ab0857523cc49f5, type: 3}
+  muzzleSpeed: 55
+  damage: 80
+  blastRadius: 3
+  maxFlight: 6
+  gravity: 9.81
+  basketPositions:
+  - {x: -1.3, y: 2.08, z: 1.9}
+  - {x: 1.3, y: 2.08, z: 1.9}
+  basketCapacity: 5
+--- !u!114 &1597324335949580702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8021979015480145695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df11616cb60eb0b4fb6b698d51c2d68e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Letsail.Runtime::Letsail.Ship.ShipRelics
+  ShowTopMostFoldoutHeaderGroup: 1
+  catalog: {fileID: 11400000, guid: 1513dc58f8f91834baef9649f7f2121a, type: 2}
+  slotPrefix: Shelf_Cabin_Slot_
 --- !u!1 &8849603053180203458
 GameObject:
   m_ObjectHideFlags: 0
@@ -1602,8 +1653,11 @@ MonoBehaviour:
   muzzle: {fileID: 2366858370945968231}
   minElevation: -5
   maxElevation: 20
+  maxYaw: 25
   cameraPitchForLevel: 10
   aimSpeed: 40
+  recoilDistance: 0.3
+  recoilReturn: 0.8
 --- !u!1 &432966710123096004 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7720373474414935578, guid: 7ca9e0c3ac86a5b4f96d3565f9b8a994, type: 3}
@@ -2952,8 +3006,11 @@ MonoBehaviour:
   muzzle: {fileID: 4954348388966145151}
   minElevation: -5
   maxElevation: 20
+  maxYaw: 25
   cameraPitchForLevel: 10
   aimSpeed: 40
+  recoilDistance: 0.3
+  recoilReturn: 0.8
 --- !u!1 &4531050566925266214 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6037062464632583416, guid: 7ca9e0c3ac86a5b4f96d3565f9b8a994, type: 3}
@@ -3277,8 +3334,11 @@ MonoBehaviour:
   muzzle: {fileID: 8647527984956127800}
   minElevation: -5
   maxElevation: 20
+  maxYaw: 25
   cameraPitchForLevel: 10
   aimSpeed: 40
+  recoilDistance: 0.3
+  recoilReturn: 0.8
 --- !u!1 &5011925560976837311 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2930609253478880097, guid: 7ca9e0c3ac86a5b4f96d3565f9b8a994, type: 3}
@@ -4297,8 +4357,11 @@ MonoBehaviour:
   muzzle: {fileID: 520559590829409070}
   minElevation: -5
   maxElevation: 20
+  maxYaw: 25
   cameraPitchForLevel: 10
   aimSpeed: 40
+  recoilDistance: 0.3
+  recoilReturn: 0.8
 --- !u!1 &6947478865768617518 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8265208055235260432, guid: 7ca9e0c3ac86a5b4f96d3565f9b8a994, type: 3}
@@ -4744,8 +4807,11 @@ MonoBehaviour:
   muzzle: {fileID: 1533973705890493767}
   minElevation: -5
   maxElevation: 20
+  maxYaw: 25
   cameraPitchForLevel: 10
   aimSpeed: 40
+  recoilDistance: 0.3
+  recoilReturn: 0.8
 --- !u!137 &7859431119493702240 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -9208668410500613186, guid: 7ca9e0c3ac86a5b4f96d3565f9b8a994, type: 3}
@@ -5264,8 +5330,11 @@ MonoBehaviour:
   muzzle: {fileID: 8545819723137393239}
   minElevation: -5
   maxElevation: 20
+  maxYaw: 25
   cameraPitchForLevel: 10
   aimSpeed: 40
+  recoilDistance: 0.3
+  recoilReturn: 0.8
 --- !u!1 &8887957069368769230 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1620785648384926480, guid: 7ca9e0c3ac86a5b4f96d3565f9b8a994, type: 3}
