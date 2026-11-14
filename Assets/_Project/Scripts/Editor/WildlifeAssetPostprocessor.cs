@@ -65,7 +65,7 @@ namespace Letsail.Editor
                 int underscore = action.LastIndexOf('_');
                 if (underscore >= 0) action = action.Substring(underscore + 1);
                 // 이펙트 클립(…_Fire)은 한 번만 재생한다.
-                clip.loopTime = !IsEffect && LoopActions.Contains(action);
+                clip.loopTime = IsEffect ? clip.name.Contains("Trail") : LoopActions.Contains(action);
                 clip.keepOriginalPositionY = true;
                 clip.keepOriginalPositionXZ = true;
                 clip.keepOriginalOrientation = true;
@@ -93,6 +93,9 @@ namespace Letsail.Editor
         // 빛나는 머티리얼: 딱정벌레 무늬·박쥐 눈, 용암, 아귀 미끼
         static readonly string[] GlowMaterials = { "BeetleGlow", "LavaCore", "LureGlow" };
 
+        // 이펙트에서 빛나는 불 머티리얼 (README: M_FX_Core, M_FX_Flash, M_FX_Fire, M_FX_Spark)
+        static readonly string[] FireMaterials = { "M_FX_Core", "M_FX_Flash", "M_FX_Fire", "M_FX_Spark" };
+
         void ApplyMaterial(Material material)
         {
             if (!IsWildlife && !IsItem && !IsEffect) return;
@@ -102,8 +105,14 @@ namespace Letsail.Editor
             if (!material.HasProperty("_EmissionColor")) return;
             Color baseColor = material.HasProperty("_BaseColor") ? material.GetColor("_BaseColor") : material.color;
             float strength = 0f;
-            // 총구 불꽃·불똥은 같은 색으로 강도 2.5. 연기는 그대로.
-            if (IsEffect && !material.name.Contains("Smoke")) strength = 2.5f;
+            // 불 머티리얼(속불·섬광·불꽃·불똥)만 같은 색으로 강도 2.5. 연기·물·흙·나무 파편은 그대로.
+            if (IsEffect)
+            {
+                foreach (var fire in FireMaterials)
+                {
+                    if (material.name.Contains(fire)) strength = 2.5f;
+                }
+            }
             foreach (var glow in GlowMaterials)
             {
                 if (material.name.Contains(glow)) strength = 1.6f;
